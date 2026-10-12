@@ -8,7 +8,7 @@ blueprint:
       description: The sensor entity to monitor.
       selector:
         entity:
-          domain: sensor
+          domain: binary_sensor
     notify_title:
       name: Title
       description: The notification's title.
