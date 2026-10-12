@@ -1,0 +1,28 @@
+blueprint:
+  name: One-Time Notification
+  description: Notify when a given entity changes state.
+  domain: automation
+  input:
+    entity:
+      name: Sensor Entity
+      description: The sensor entity to monitor.
+      selector:
+        entity:
+          domain: sensor
+    notify_title:
+      name: Title
+      description: The notification's title.
+      selector:
+        text:
+trigger:
+  - platform: state
+    entity_id: !input entity
+condition: []
+action:
+  - service: notify.persistent_notification
+    data:
+      title: !input notify_title
+      message: 'Changed state to {{ trigger.to_state.state }}'
+  - service: automation.turn_off
+    target:
+      entity_id: '{{ this.entity_id }}'
